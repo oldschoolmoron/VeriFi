@@ -1,6 +1,6 @@
 import { CiSearch } from "react-icons/ci";
 import { FaCloudUploadAlt } from "react-icons/fa";
-import {} from "@/custom-border/PartialFrame";
+// import {} from "@/custom-border/PartialFrame";
 import { AiOutlineEnter } from "react-icons/ai";
 
 export function SearchPill() {
