@@ -1,4 +1,7 @@
+import { ethers } from "ethers";
+// https://etherscan.io/accounts
 // src/app/api/verifyAddress/route.js
+
 export async function POST(req) {
   try {
     const { address } = await req.json();
@@ -12,9 +15,8 @@ export async function POST(req) {
     const apiKey = process.env.ETHERSCAN_API_KEY;
 
     //V2 API endpoint
-    const url = `https://api.etherscan.io/v2/api?chainid=1&module=account&action=balance&address=${address}&apikey=${apiKey}`;
-
-    console.log("Fetching:", url);
+    const url = `https://api.etherscan.io/v2/api?chainid=1&module=account&action=balance&address=${address}&showtokens=true&apikey=${apiKey}`;
+    // console.log("Fetching:", url);
 
     const response = await fetch(url);
     const data = await response.json();
@@ -26,8 +28,14 @@ export async function POST(req) {
         { status: 400 }
       );
     }
+    const ethBalance = ethers.formatEther(data.result);
 
-    return new Response(JSON.stringify({ balance: data.result }), {
+    return new Response(JSON.stringify({ 
+      address,
+      ensName: data.ens || null,
+      ethBalance,
+      tokens: data.tokens || []
+     }), {
       status: 200,
     });
   } catch (err) {
