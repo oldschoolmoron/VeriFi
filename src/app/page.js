@@ -1,5 +1,6 @@
 import Navbar from '@/components/Navbar';
-import {SearchPill, UploadBox} from '@/components/UploadBox';
+import { UploadBox} from '@/components/UploadBox';
+import { SearchPill } from '@/components/SearchPill';
 
 export default function Home() {
   return (
